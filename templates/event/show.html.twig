@@ -1,0 +1,52 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ event.title }}{% endblock %}
+
+{% block body %}
+<div class="card mb-4">
+    <div class="card-header">
+        <h2>{{ event.title }}</h2>
+        <span class="text-muted">📅 {{ event.date | date('d/m/Y à H:i') }} — 📍 {{ event.location }}</span>
+    </div>
+    <div class="card-body">
+        {% if event.image %}
+            <img src="{{ event.image }}" class="img-fluid mb-3 rounded" alt="{{ event.title }}" style="max-height:350px">
+        {% endif %}
+        <p>{{ event.description | nl2br }}</p>
+        <p><strong>Places disponibles :</strong> {{ event.seats }}</p>
+    </div>
+    <div class="card-footer d-flex gap-2">
+        <a href="{{ path('event_reserve', {id: event.id}) }}" class="btn btn-success">Réserver</a>
+        <a href="{{ path('app_event_edit', {id: event.id}) }}" class="btn btn-warning">Modifier</a>
+        <a href="{{ path('app_event_index') }}" class="btn btn-secondary">Retour</a>
+    </div>
+</div>
+
+{# Liste des réservations (admin) #}
+<div class="card">
+    <div class="card-header">
+        <h5>Réservations ({{ event.reservations | length }})</h5>
+    </div>
+    <div class="card-body">
+        {% if event.reservations is empty %}
+            <p class="text-muted">Aucune réservation pour le moment.</p>
+        {% else %}
+            <table class="table">
+                <thead>
+                    <tr><th>Nom</th><th>Email</th><th>Téléphone</th><th>Date</th></tr>
+                </thead>
+                <tbody>
+                    {% for resa in event.reservations %}
+                    <tr>
+                        <td>{{ resa.name }}</td>
+                        <td>{{ resa.email }}</td>
+                        <td>{{ resa.phone ?? '-' }}</td>
+                        <td>{{ resa.createdAt | date('d/m/Y H:i') }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

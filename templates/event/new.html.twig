@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer un événement{% endblock %}
+
+{% block body %}
+<div class="card">
+    <div class="card-header"><h4>Créer un événement</h4></div>
+    <div class="card-body">
+        {{ form_start(form) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.date) }}
+        {{ form_row(form.location) }}
+        {{ form_row(form.seats) }}
+        {{ form_row(form.image) }}
+        <div class="mt-3">
+            <button type="submit" class="btn btn-success">Créer</button>
+            <a href="{{ path('app_event_index') }}" class="btn btn-secondary">Annuler</a>
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}
