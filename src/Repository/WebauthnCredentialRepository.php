@@ -30,4 +30,16 @@ class WebauthnCredentialRepository extends ServiceEntityRepository
     {
         return $this->findBy(['user' => $user]);
     }
+
+    public function findOneByCredentialId(string $credentialId): ?WebauthnCredential
+{
+    $all = $this->findAll();
+    foreach ($all as $cred) {
+        $data = json_decode($cred->getCredentialData(), true);
+        if (($data['id'] ?? null) === $credentialId) {
+            return $cred;
+        }
+    }
+    return null;
+}
 }
