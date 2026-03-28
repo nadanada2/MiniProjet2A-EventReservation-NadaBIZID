@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="UTF-8"></head>
+<body style="font-family: Arial, sans-serif; padding: 20px;">
+    <h2 style="color: #2c3e50;">Confirmation de réservation</h2>
+    <p>Bonjour <strong>{{ reservation.name }}</strong>,</p>
+    <p>Votre réservation est bien confirmée pour l'événement suivant :</p>
+
+    <div style="background:#f8f9fa;padding:15px;border-radius:8px;margin:20px 0;">
+        <h3 style="margin:0 0 10px;">{{ event.title }}</h3>
+        <p>📅 <strong>Date :</strong> {{ event.date | date('d/m/Y à H:i') }}</p>
+        <p>📍 <strong>Lieu :</strong> {{ event.location }}</p>
+    </div>
+
+    <p>Numéro de réservation : <strong>#{{ reservation.id }}</strong></p>
+    <p>Merci et à bientôt !</p>
+
+    <hr>
+    <small style="color:#999;">EventApp — ISSAT Sousse 2025/2026</small>
+</body>
+</html>

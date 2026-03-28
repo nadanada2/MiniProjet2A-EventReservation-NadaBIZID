@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Connexion{% endblock %}
+
+{% block body %}
+<div class="row justify-content-center">
+    <div class="col-md-5">
+        <div class="card mt-4">
+            <div class="card-header"><h4>Connexion</h4></div>
+            <div class="card-body">
+                <div id="login-form">
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="email" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mot de passe</label>
+                        <input type="password" id="password" class="form-control">
+                    </div>
+                    <button onclick="loginWithPassword()" class="btn btn-primary w-100 mb-2">Se connecter</button>
+                    <hr>
+                    <button onclick="loginWithPasskey()" class="btn btn-outline-primary w-100">
+                        🔑 Connexion avec Passkey
+                    </button>
+                    <hr>
+                    <p class="text-center">Pas encore de compte ?
+                        <a href="#" onclick="showRegister()">S'inscrire</a>
+                    </p>
+                </div>
+
+                <div id="register-form" style="display:none">
+                    <div class="mb-3">
+                        <label class="form-label">Nom d'utilisateur</label>
+                        <input type="text" id="reg-username" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="reg-email" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Mot de passe</label>
+                        <input type="password" id="reg-password" class="form-control">
+                    </div>
+                    <button onclick="registerUser()" class="btn btn-success w-100 mb-2">S'inscrire</button>
+                    <hr>
+                    <button onclick="registerPasskey(document.getElementById('reg-email').value)" class="btn btn-outline-success w-100">
+                        🔑 Créer une Passkey
+                    </button>
+                    <p class="text-center mt-2">
+                        <a href="#" onclick="showLogin()">Retour à la connexion</a>
+                    </p>
+                </div>
+
+                <div id="msg" class="mt-3"></div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block javascripts %}
+<script src="{{ asset('js/auth.js') }}"></script>
+<script>
+function showRegister() {
+    document.getElementById('login-form').style.display = 'none';
+    document.getElementById('register-form').style.display = 'block';
+}
+function showLogin() {
+    document.getElementById('register-form').style.display = 'none';
+    document.getElementById('login-form').style.display = 'block';
+}
+function msg(text, type='success') {
+    document.getElementById('msg').innerHTML =
+        `<div class="alert alert-${type}">${text}</div>`;
+}
+
+async function loginWithPassword() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    try {
+        const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({email, password})
+        });
+        const data = await res.json();
+        if (data.token) {
+            localStorage.setItem('jwt_token', data.token);
+            msg('Connexion réussie ! Redirection...');
+            setTimeout(() => window.location.href = '/', 1000);
+        } else {
+            msg(data.error || 'Erreur', 'danger');
+        }
+    } catch(e) { msg('Erreur réseau', 'danger'); }
+}
+
+async function registerUser() {
+    const username = document.getElementById('reg-username').value;
+    const email = document.getElementById('reg-email').value;
+    const password = document.getElementById('reg-password').value;
+    try {
+        const res = await fetch('/api/auth/register', {
+            method: 'POST',
+            headers: {'Content-Type': 'application/json'},
+            body: JSON.stringify({username, email, password})
+        });
+        const data = await res.json();
+        if (data.token) {
+            localStorage.setItem('jwt_token', data.token);
+            msg('Inscription réussie !');
+            setTimeout(() => window.location.href = '/', 1000);
+        } else {
+            msg(data.error || 'Erreur', 'danger');
+        }
+    } catch(e) { msg('Erreur réseau', 'danger'); }
+}
+</script>
+{% endblock %}
