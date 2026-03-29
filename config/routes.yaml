@@ -1,11 +1,77 @@
-# yaml-language-server: $schema=../vendor/symfony/routing/Loader/schema/routing.schema.json
+# API Auth routes
+auth_register:
+    path: /api/auth/register
+    controller: App\Controller\AuthApiController::register
+    methods: POST
 
-# This file is the entry point to configure the routes of your app.
-# Methods with the #[Route] attribute are automatically imported.
-# See also https://symfony.com/doc/current/routing.html
+auth_login:
+    path: /api/auth/login
+    controller: App\Controller\AuthApiController::login
+    methods: POST
 
-# To list all registered routes, run the following command:
-#   bin/console debug:router
+auth_me:
+    path: /api/auth/me
+    controller: App\Controller\AuthApiController::me
+    methods: GET
 
-controllers:
-    resource: routing.controllers
+auth_register_options:
+    path: /api/auth/register/options
+    controller: App\Controller\AuthApiController::registerOptions
+    methods: POST
+
+auth_register_verify:
+    path: /api/auth/register/verify
+    controller: App\Controller\AuthApiController::registerVerify
+    methods: POST
+
+auth_login_options:
+    path: /api/auth/login/options
+    controller: App\Controller\AuthApiController::loginOptions
+    methods: POST
+
+auth_login_verify:
+    path: /api/auth/login/verify
+    controller: App\Controller\AuthApiController::loginVerify
+    methods: POST
+
+# Refresh token route (provided by bundle)
+gesdinet_jwt_refresh_token:
+    path: /api/token/refresh
+    controller: gesdinet.jwtrefreshtoken::refresh
+
+# Login page
+login_page:
+    path: /login
+    controller: App\Controller\LoginController::index
+
+# Test route (to verify routing works)
+test_route:
+    path: /test
+    controller: App\Controller\TestController::test
+
+
+# Event CRUD routes
+app_event_index:
+    path: /event
+    controller: App\Controller\EventController::index
+    methods: GET
+
+app_event_new:
+    path: /event/new
+    controller: App\Controller\EventController::new
+    methods: GET|POST
+
+app_event_show:
+    path: /event/{id}
+    controller: App\Controller\EventController::show
+    methods: GET
+
+app_event_edit:
+    path: /event/{id}/edit
+    controller: App\Controller\EventController::edit
+    methods: GET|POST
+
+app_event_delete:
+    path: /event/{id}
+    controller: App\Controller\EventController::delete
+    methods: POST
