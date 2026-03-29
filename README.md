@@ -124,6 +124,25 @@ tests/
 │   └── EventControllerTest.php
 ```
 
+## Screenshots
+
+### Liste des événements
+![Liste événements](screenshots/events-list.png)
+
+### Details d'un évènement
+![Détails](screenshots/reservation-details.png)
+
+### Formulaire de réservation
+![Réservation](screenshots/reservation-form.png)
+
+![Réservation confirmée](reservation-confirmed.png)
+
+### Mail de confirmation
+![Mail](screenshots/mail-confirmation.png)
+
+### Tests PHPUnit
+![Tests](screenshots/phpunit-tests.png)
+
 ## Modules obligatoires
 - **Sécurité renforcée** : JWT (LexikBundle) + Passkeys (WebAuthn/FIDO2)
 - **Confirmation par mail** : Symfony Mailer + template Twig
