@@ -130,10 +130,13 @@ tests/
 
 ## Screenshots
 
+### Création d'un événement
+![Création événements](screenshots/event-creation.png)
+
 ### Liste des événements
 ![Liste événements](screenshots/events-list.png)
 
-### Details d'un évènement
+### Details d'un événement
 ![Détails](screenshots/reservation-details.png)
 
 ### Formulaire de réservation
