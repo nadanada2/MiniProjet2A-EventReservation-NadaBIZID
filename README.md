@@ -124,6 +124,10 @@ tests/
 │   └── EventControllerTest.php
 ```
 
+## Modules obligatoires
+- **Sécurité renforcée** : JWT (LexikBundle) + Passkeys (WebAuthn/FIDO2)
+- **Confirmation par mail** : Symfony Mailer + template Twig
+
 ## Screenshots
 
 ### Liste des événements
@@ -136,7 +140,7 @@ tests/
 ![Réservation](screenshots/reservation-form.png)
 
 ### Réservation confirmée
-![Réservation confirmée](reservation-confirmed.png)
+![Réservation confirmée](screenshots/reservation-confirmed.png)
 
 ### Mail de confirmation
 ![Mail](screenshots/mail-confirmation.png)
@@ -144,9 +148,6 @@ tests/
 ### Tests PHPUnit
 ![Tests](screenshots/phpunit-tests.png)
 
-## Modules obligatoires
-- **Sécurité renforcée** : JWT (LexikBundle) + Passkeys (WebAuthn/FIDO2)
-- **Confirmation par mail** : Symfony Mailer + template Twig
 
 ## Auteur
 **Nada BIZID** — FIA2-GL — ISSAT Sousse
