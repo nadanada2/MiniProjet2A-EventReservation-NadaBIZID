@@ -28,7 +28,7 @@ class ReservationController extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $reservation->setCreatedAt(new \DateTimeImmutable());
+            $reservation->setCreateAt(new \DateTimeImmutable());
             $em->persist($reservation);
             $em->flush();
 

@@ -75,3 +75,9 @@ app_event_delete:
     path: /event/{id}
     controller: App\Controller\EventController::delete
     methods: POST
+
+# Reservation routes
+event_reserve:
+    path: /events/{id}/reserve
+    controller: App\Controller\ReservationController::reserve
+    methods: GET|POST

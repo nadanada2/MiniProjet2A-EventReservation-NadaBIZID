@@ -135,6 +135,7 @@ tests/
 ### Formulaire de réservation
 ![Réservation](screenshots/reservation-form.png)
 
+### Réservation confirmée
 ![Réservation confirmée](reservation-confirmed.png)
 
 ### Mail de confirmation
